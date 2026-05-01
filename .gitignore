@@ -1,5 +1,9 @@
-# Object file
-*.o
-
-# Ada Library Information
-*.ali
+__pycache__/
+*.pyc
+.instance
+instance/
+*.db
+.env
+venv/
+node_modules/
+.DS_Store
