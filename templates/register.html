@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Register - HormoneAI{% endblock %}
+
+{% block content %}
+<div class="auth-page-shell">
+  <div class="auth-card">
+    <h2>Create your account</h2>
+    <p>Join HormoneAI and begin your personalized wellness journey.</p>
+    <form method="POST" class="auth-form">
+      <label>Name</label>
+      <input type="text" name="name" placeholder="Your name" required />
+      <label>Email</label>
+      <input type="email" name="email" placeholder="you@example.com" required />
+      <label>Password</label>
+      <input type="password" name="password" placeholder="Password" required />
+      <button class="button button-gradient" type="submit">Create account</button>
+    </form>
+    <p class="auth-note">Already have an account? <a href="{{ url_for('home', tab='login') }}">Sign in</a></p>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,324 @@
+{% extends "base.html" %}
+
+{% block title %}HormoneAI · Personal Wellness Coach{% endblock %}
+
+{% block content %}
+<div class="layout-grid">
+  <section class="hero-panel">
+    <div class="hero-brand">
+      <div class="hero-badge">🌸 Hormone <span class="hero-brand-accent">AI</span> 🌙</div>
+      <div class="hero-subtitle">Personal wellness coach</div>
+    </div>
+
+    <h1>Balance your hormones with an AI coach that understands your body.</h1>
+    <p>HormoneAI blends biology, behavior, and mood signals into a wellness plan built for your cycle, stress patterns, and energy needs.</p>
+
+    <div class="hero-grid">
+      <article class="hero-card">
+        <span class="hero-card-icon">🌿</span>
+        <h3>Daily hormone insights</h3>
+        <p>Get simple, evidence-based recommendations for sleep, nutrition, and stress recovery tailored to your hormonal rhythm.</p>
+      </article>
+      <article class="hero-card">
+        <span class="hero-card-icon">💡</span>
+        <h3>Smart pattern tracking</h3>
+        <p>Track cycle shifts, energy swings, and mood trends so you can take action before symptoms arrive.</p>
+      </article>
+      <article class="hero-card">
+        <span class="hero-card-icon">✨</span>
+        <h3>Personalized lifestyle coaching</h3>
+        <p>Receive routine-based guidance for better sleep, balanced metabolism, and calm, consistent energy.</p>
+      </article>
+    </div>
+
+    <div class="hero-highlights">
+      <div>
+        <strong>Trusted for:</strong>
+        <p>cycle support, thyroid balance, PCOS care, adrenal resilience, and perimenopause wellness.</p>
+      </div>
+      <div>
+        <strong>Perfect for:</strong>
+        <p>anyone looking for hormone clarity without the overwhelm.</p>
+      </div>
+    </div>
+
+    <div class="hero-purpose">
+      <h2>Main purpose of HormoneAI</h2>
+      <p>HormoneAI is designed to turn hormone awareness into actionable guidance. It helps you understand your body, tune your daily routines, and stay balanced with gentle, science-informed coaching.</p>
+      <ul class="purpose-list">
+        <li><strong>Insight-driven direction:</strong> Learn how sleep, nutrition, stress, and cycle rhythms connect to your energy and mood.</li>
+        <li><strong>Personalized routine support:</strong> Get easy-to-use habits for better recovery, calmer stress response, and hormone-friendly eating.</li>
+        <li><strong>Everyday wellness coaching:</strong> Receive practical recommendations that fit your life, not another rigid program.</li>
+      </ul>
+    </div>
+  </section>
+
+  {% if user %}
+  <section class="auth-panel">
+    <div class="auth-shell">
+      <div class="auth-decoration"></div>
+      <div class="auth-heading">
+        <h2>Welcome back, {{ user }}!</h2>
+        <p>You're signed in to HormoneAI. Ready to explore your wellness insights?</p>
+      </div>
+      <div class="auth-actions">
+        <a href="{{ url_for('dashboard') }}" class="button button-gradient">Go to Dashboard</a>
+        <a href="{{ url_for('logout') }}" class="button button-secondary">Sign out</a>
+      </div>
+    </div>
+  </section>
+  {% else %}
+  <section class="auth-panel">
+    <div class="auth-shell">
+      <div class="auth-decoration"></div>
+      <div class="auth-heading">
+        <h2>Sign in or create your HormoneAI account</h2>
+        <p>Start your wellness journey with a supportive AI coach built for hormones.</p>
+      </div>
+
+      <div class="auth-tabs" role="tablist">
+        <button type="button" class="auth-tab" data-tab="login">Sign in</button>
+        <button type="button" class="auth-tab" data-tab="register">Create account</button>
+      </div>
+      <div id="active-tab" data-active="{{ active_tab }}"></div>
+
+      <form id="login-form" method="POST" action="{{ url_for('login') }}" class="auth-form">
+        <label>Email</label>
+        <input type="email" name="email" placeholder="you@example.com" required />
+        <label>Password</label>
+        <input type="password" name="password" placeholder="At least 6 characters" required />
+        <button class="button button-gradient" type="submit">Sign in</button>
+        <button class="button button-secondary" type="button" onclick="window.location.href='{{ url_for('home', tab='register') }}'">Create account</button>
+      </form>
+
+      <form id="register-form" method="POST" action="{{ url_for('register') }}" class="auth-form hidden">
+        <label>Name</label>
+        <input type="text" name="name" placeholder="Your name" required />
+        <label>Email</label>
+        <input type="email" name="email" placeholder="you@example.com" required />
+        <label>Password</label>
+        <input type="password" name="password" placeholder="At least 6 characters" required />
+        <button class="button button-gradient" type="submit">Create account</button>
+        <button class="button button-secondary" type="button" onclick="window.location.href='{{ url_for('home', tab='login') }}'">Sign in</button>
+      </form>
+
+      <div class="auth-footer">
+        <p class="auth-note">By continuing you acknowledge HormoneAI provides educational guidance — not medical advice.</p>
+      </div>
+    </div>
+  </section>
+  {% endif %}
+</div>
+
+<section class="tracker-panel">
+  <div class="tracker-shell">
+    <div class="tracker-heading">
+      <h2>Award-winning smart tracker insights</h2>
+      <p>See your hormone, energy, and recovery trends at a glance with premium chart visuals and intelligent rhythm cues.</p>
+    </div>
+
+    <div class="tracker-tabs" role="tablist">
+      <button type="button" class="tracker-tab active" data-tab="overview">Overview</button>
+      <button type="button" class="tracker-tab" data-tab="updates">Track Updates</button>
+    </div>
+
+    <div id="overview-tab" class="tracker-content active">
+      <div class="tracker-summary">
+        <article class="tracker-widget">
+          <div class="tracker-ring ring-sleep"><span>82%</span></div>
+          <div>
+            <strong>Sleep readiness</strong>
+            <p>On-track with wind-down routines, deeper rest, and better cycle recovery.</p>
+          </div>
+        </article>
+        <article class="tracker-widget">
+          <div class="tracker-ring ring-energy"><span>74%</span></div>
+          <div>
+            <strong>Energy balance</strong>
+            <p>Consistent energy peaks and gentle mid-day flow for smooth productivity.</p>
+          </div>
+        </article>
+        <article class="tracker-widget">
+          <div class="tracker-ring ring-stress"><span>68%</span></div>
+          <div>
+            <strong>Stress recovery</strong>
+            <p>Strong reset signals with supportive calm habits.</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="tracker-grid">
+        <article class="tracker-card tracker-card-hero">
+          <div class="tracker-card-badge">Smart tracker</div>
+          <h3>Cycle balance</h3>
+          <p>Track phase shifts and symptoms so you can anticipate high-energy and recovery days.</p>
+          <div class="tracker-graph tracker-graph-bands">
+            <div class="tracker-band tracker-band-full"></div>
+            <div class="tracker-band tracker-band-medium"></div>
+            <div class="tracker-band tracker-band-low"></div>
+          </div>
+        </article>
+        <article class="tracker-card">
+          <h3>Energy flow</h3>
+          <p>See how your daily energy compares over time and find the best windows for focused work.</p>
+          <div class="tracker-pie-chart">
+            <span>60%</span>
+          </div>
+        </article>
+        <article class="tracker-card">
+          <h3>Stress recovery</h3>
+          <p>Monitor how well your body recovers between busy days and where you need more calm support.</p>
+          <div class="tracker-pie-chart tracker-pie-low">
+            <span>42%</span>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <div id="updates-tab" class="tracker-content">
+      <div class="tracker-updates-form">
+        <h3>Get personalized track updates</h3>
+        <p>Share your current mood, energy, and symptoms to receive tailored insights from HormoneAI.</p>
+        <form id="tracker-form">
+          <label>How is your mood today?</label>
+          <select name="mood">
+            <option value="great">Great</option>
+            <option value="good">Good</option>
+            <option value="neutral">Neutral</option>
+            <option value="low">Low</option>
+            <option value="anxious">Anxious</option>
+          </select>
+
+          <label>Energy level (1-10)?</label>
+          <input type="number" name="energy" min="1" max="10" placeholder="5" required />
+
+          <label>Any symptoms or notes?</label>
+          <textarea name="symptoms" placeholder="e.g., tired, cramps, stress"></textarea>
+
+          <button class="button button-gradient" type="submit">Generate Updates</button>
+        </form>
+      </div>
+
+      <div id="tracker-updates-result" class="tracker-updates-result hidden">
+        <h3>Your personalized updates</h3>
+        <div id="updates-content"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="reminders-panel">
+  <div class="reminders-shell">
+    <div class="reminders-heading">
+      <h2>Daily health reminders</h2>
+      <p>Stay on track with personalized wellness cues for common hormone concerns. Set gentle intentions for better balance.</p>
+    </div>
+
+    <div class="reminders-tabs" role="tablist">
+      <button type="button" class="reminders-tab active" data-tab="daily">Daily Reminders</button>
+      <button type="button" class="reminders-tab" data-tab="set">Set Reminder</button>
+    </div>
+
+    <div id="daily-tab" class="reminders-content active">
+      <div class="reminders-grid">
+        <article class="reminder-card">
+          <div class="reminder-icon">🌙</div>
+          <h3>Sleep support</h3>
+          <p>Wind down 1 hour before bed with dim lights and no screens. Aim for 7-9 hours of restful sleep to support hormone recovery and cortisol balance. Try magnesium-rich foods like nuts or leafy greens for deeper relaxation.</p>
+        </article>
+        <article class="reminder-card">
+          <div class="reminder-icon">🧘</div>
+          <h3>Stress recovery</h3>
+          <p>Take 5 deep breaths when stress rises. Practice gentle movement like walking or yoga to reset your nervous system. Include calming rituals like herbal tea or journaling to maintain adrenal resilience.</p>
+        </article>
+        <article class="reminder-card">
+          <div class="reminder-icon">🌸</div>
+          <h3>Cycle awareness</h3>
+          <p>Track your cycle phases to anticipate energy shifts. During follicular phase, focus on strength activities; luteal phase, prioritize rest. Stay hydrated and note symptoms for better cycle prediction.</p>
+        </article>
+        <article class="reminder-card">
+          <div class="reminder-icon">🥗</div>
+          <h3>Nutrition balance</h3>
+          <p>Eat balanced meals with protein, healthy fats, and fiber to stabilize blood sugar. Include hormone-friendly foods like salmon, avocado, and berries. Avoid sugar spikes that can disrupt insulin and mood.</p>
+        </article>
+        <article class="reminder-card">
+          <div class="reminder-icon">⚡</div>
+          <h3>Energy management</h3>
+          <p>Build steady energy with morning sunlight, protein-rich breakfast, and mid-day movement breaks. Avoid caffeine crashes by pairing with food. Listen to your body's natural rhythms for sustainable vitality.</p>
+        </article>
+        <article class="reminder-card">
+          <div class="reminder-icon">😊</div>
+          <h3>Mood stability</h3>
+          <p>Support mood with omega-3 rich foods, regular exercise, and social connections. Practice gratitude journaling daily. If mood dips, gentle self-care like a warm bath can help restore balance.</p>
+        </article>
+        <article class="reminder-card">
+          <div class="reminder-icon">🦋</div>
+          <h3>Thyroid health</h3>
+          <p>Support thyroid function with iodine-rich foods like seaweed and selenium sources like Brazil nuts. Maintain consistent sleep and manage stress to optimize thyroid hormone production.</p>
+        </article>
+        <article class="reminder-card">
+          <div class="reminder-icon">🌿</div>
+          <h3>PCOS support</h3>
+          <p>Focus on insulin-sensitizing foods like cinnamon and chromium-rich veggies. Combine with regular movement and stress reduction. Track ovulation signs for better cycle management.</p>
+        </article>
+        <article class="reminder-card">
+          <div class="reminder-icon">🌱</div>
+          <h3>Adrenal recovery</h3>
+          <p>Recharge adrenals with restorative rest, nourishing meals, and stress-free evenings. Include adaptogenic herbs like ashwagandha. Prioritize gentle activities over high-intensity workouts.</p>
+        </article>
+      </div>
+    </div>
+
+    <div id="set-tab" class="reminders-content">
+      <div class="set-reminder-form">
+        <h3>Create a custom reminder</h3>
+        <p>Set personalized wellness reminders to support your hormone health journey.</p>
+        <form id="reminder-form">
+          <label>Reminder title</label>
+          <input type="text" name="title" placeholder="e.g., Take vitamins" required />
+
+          <label>Description</label>
+          <textarea name="description" placeholder="Add details about your reminder"></textarea>
+
+          <label>Frequency</label>
+          <select name="frequency">
+            <option value="daily">Daily</option>
+            <option value="weekly">Weekly</option>
+            <option value="monthly">Monthly</option>
+          </select>
+
+          <label>Time (optional)</label>
+          <input type="time" name="time" />
+
+          <button class="button button-gradient" type="submit">Set Reminder</button>
+        </form>
+      </div>
+
+      <div id="reminder-list" class="reminder-list">
+        <h3>Your custom reminders</h3>
+        <div id="custom-reminders"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="chat-panel">
+  <div class="chat-shell">
+    <div class="chat-heading">
+      <h2>Ask your HormoneAI coach</h2>
+      <p>Get instant wellness recommendations, cycle-friendly tips, and stress-support ideas in this interactive companion box.</p>
+    </div>
+
+    <div id="chat-messages" class="chat-messages">
+      <div class="chat-message bot">
+        Hi there! Ask me anything about hormone balance, sleep support, energy, or mood today.
+      </div>
+    </div>
+
+    <form id="chat-form" class="chat-form">
+      <input id="chat-input" type="text" placeholder="Type a question for HormoneAI..." autocomplete="off" required />
+      <button class="button button-gradient" type="submit">Send</button>
+    </form>
+  </div>
+</section>
+{% endblock %}

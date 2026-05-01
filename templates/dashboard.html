@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - HormoneAI{% endblock %}
+
+{% block content %}
+<div class="dashboard-shell">
+  <section class="dashboard-hero">
+    <div class="hero-brand">
+      <div class="hero-badge">Hormone<span class="hero-brand-accent">AI</span></div>
+      <div class="hero-subtitle">Welcome back</div>
+    </div>
+    <h1>Hey {{ user_name }}, here is your hormone wellbeing hub.</h1>
+    <p>Track your progress, review personalized insights, and take action with daily routines designed to support your balance.</p>
+  </section>
+
+  <section class="dashboard-actions">
+    <div class="dashboard-card">
+      <h3>Today's focus</h3>
+      <p>Check your current energy trend, hydration habit, and stress recovery plan.</p>
+    </div>
+    <div class="dashboard-card">
+      <h3>Next step</h3>
+      <p>Complete your daily wellness reflection and unlock more personalized coaching.</p>
+    </div>
+    <div class="dashboard-card dashboard-card-primary">
+      <h3>Ready for more?</h3>
+      <a class="button button-gradient" href="{{ url_for('logout') }}">Logout</a>
+    </div>
+  </section>
+</div>
+{% endblock %}
